@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Arial, sans-serif;
+  }
+
+  .title-style {
+    @apply text-lg; /* This is a Tailwind class for font size */
+    font-family: Arial, sans-serif;
+    font-size: 24px; /* Custom font size, if Tailwind's `text-lg` doesn't match 14px */
+}
+
+/* Custom styles */
+input {
+    @apply border-2 border-blue-200;
+}
+
+/* Custom styles for button */
+.dark-blue-button {
+    @apply bg-blue-800 text-white font-bold py-2 px-4 rounded;
+}
+
+.logo {
+    /* Example: set a maximum width for the logo */
+    max-width: 150px; /* Adjust as needed */
+    height: auto; /* To maintain aspect ratio */
+}
