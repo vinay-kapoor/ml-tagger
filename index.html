@@ -1,58 +1,20 @@
+<script src="app.js" type="module"></script>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="/build/tailwind.css" rel="stylesheet">
-  <title>Image Analyzer</title>
-  <meta charset="UTF-8">
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('imageForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent the default form submission
-
-        const imageUrl = document.getElementById('imageUrl').value;
-        fetch('/analyze', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ imageUrl: imageUrl })
-        })
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('result').textContent = data;
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          document.getElementById('result').textContent = 'Error processing the request.';
-        });
-      });
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Article Tagging</title>
 </head>
 <body>
-  <header class="bg-gray-800 text-white p-4">
-  </header>
-   
-  <div class="container mx-auto px-4 py-6">
-    <div class="flex flex-col items-center justify-center bg-gray-100 text-center rounded-lg shadow-md">
-      <div class="flex justify-center w-full">
-        <img src="logo_colour.svg" alt="Logo" class="max-w-full h-auto"><br><br><br><br>
-      </div>
-      <h1 class ="title-style">AI Price Reporter Bot</h1><br><br><br>
-      <form id="imageForm" class="w-full">
-        <!--Enter an image URL--> 
-        <label for="imageUrl">Enter Image URL:</label><br>
-        <input type="text" id="imageUrl" name="imageUrl" class="w-full md:w-1/2 rounded-lg border-2 border-blue-200 p-2 focus:border-blue-500 focus:outline-none"><br><br>
-        <button class="dark-blue-button">Analyze Image</button><br><br>
-        <!--Alternatively, just take a picture on your phone-->    
-        <input type="file" id="imageInput" accept="image/*" capture>
-      </form>
-    </div>
-    <div id="result"></div> <!-- This is where the result will be displayed -->
-  </div>
-  <footer class="bg-gray-700 text-white p-3 text-center">
-    <!-- Footer content -->
-  </footer>
+    <h1>News Article Tagging</h1>
+    <textarea id="articleInput" placeholder="Paste the news article text here..." rows="10" cols="50"></textarea>
+    <br><br>
+    <button onclick="tagArticle()">Get Tags</button>
+    <h2>Tags:</h2>
+    <p id="tagsOutput">Tags will appear here</p>
+
+    <script src="app.js"></script>
 </body>
 </html>
-
