@@ -9,8 +9,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('🖥️ ML Tagger client initialized');
     tagButton.addEventListener('click', tagArticle);
-
     async function tagArticle() {
+        const articleText = articleInput.value.trim();
+        
+        if (!articleText) {
+            showError('Please enter some article text to analyze.');
+            return;
+        }
+    
+        // Add debug logging
+        console.log('------ Tag Request Started ------');
+        console.log('Article text:', articleText);
+        
+        // Show loading state
+        tagButton.disabled = true;
+        loadingIndicator.classList.remove('hidden');
+        resultsSection.classList.add('hidden');
+        errorMessage.classList.add('hidden');
+        
+        try {
+            const response = await fetch('http://localhost:3000/api/tag', {  // Update URL to include full path
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ articleText })
+            });
+            
+            console.log('Response status:', response.status);
+            const data = await response.json();
+            console.log('Response data:', data);
+            
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+            
+            displayTags(data.tags);
+            resultsSection.classList.remove('hidden');
+        } catch (error) {
+            console.error('Request failed:', error);
+            showError(`Failed to get tags: ${error.message}`);
+        } finally {
+            console.log('------ Tag Request Ended ------');
+            tagButton.disabled = false;
+            loadingIndicator.classList.add('hidden');
+        }
+    }
+   /* async function tagArticle() {
         const articleText = articleInput.value.trim();
         
         if (!articleText) {
@@ -63,7 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tagButton.disabled = false;
             loadingIndicator.classList.add('hidden');
         }
-    }
+    }*/
+
 
     function displayTags(tagsString) {
         // Clear previous tags
