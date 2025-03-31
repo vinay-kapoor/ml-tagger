@@ -14,7 +14,8 @@
     "build-css": "tailwindcss -i ./src/styles/styles.css -o ./public/styles/tailwind.css --config ./config/tailwind.config.js",
     "watch-css": "npm run build-css -- --watch",
     "build": "npm run build-css",
-    "deploy": "vercel"
+    "vercel-build": "npm run build",
+    "deploy": "vercel --prod"
   },
   "engines": {
     "node": ">=18.0.0"
