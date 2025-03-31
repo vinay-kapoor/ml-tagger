@@ -1,9 +1,10 @@
+const path = require('path');
+
 module.exports = {
   content: [
-    '../**/*.html',        // All HTML files anywhere in the project
-    '../public/**/*.js',   // JavaScript files in public
-    '../server/**/*.js',   // Server-side JavaScript files
-    '../src/**/*.js'       // Source JavaScript files
+    path.join(__dirname, '../public/index.html'),
+    path.join(__dirname, '../public/js/**/*.js'),
+    path.join(__dirname, '../api/*.js')
   ],
   theme: {
     extend: {},
